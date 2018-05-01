@@ -107,8 +107,6 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
     // mkdir _package/per-task-layout
     fs.mkdirSync(util.perTaskLayoutPath);
 
-
-
     // TODO: Below this line needs to be refactored for the per task nuget setup.
 
     // TODO: I think we need to make changes here but start with this and see where it goes.
