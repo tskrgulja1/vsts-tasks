@@ -35,17 +35,17 @@ steps:
   displayName: Build
 
 # Only on Windows:
-- ${{ if and(eq(parameters.os, 'Windows_NT'), ne(variables.DISTRIBUTEDTASK_USE_PERTASK_NUGET, 'true')) }}:
+- ${{ if and(eq(parameters.os, 'Windows_NT')) }}:
 
   # Stage slice
   - script: node ./ci/stage-slice.js
     displayName: Stage slice
-    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'), ne(variables.DISTRIBUTEDTASK_USE_PERTASK_NUGET, 'true'))
 
   # Publish slice artifact
   - task: PublishBuildArtifacts@1
     displayName: Publish slice artifact
-    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'), ne(variables.DISTRIBUTEDTASK_USE_PERTASK_NUGET, 'true'))
     inputs:
       pathToPublish: _package/tasks.zip
       artifactName: slice-$(system.jobPositionInPhase)
