@@ -35,7 +35,7 @@ steps:
   displayName: Build
 
 # Only on Windows:
-- ${{ if and(eq(parameters.os, 'Windows_NT')) }}:
+- ${{ if eq(parameters.os, 'Windows_NT') }}:
 
   # Stage slice
   - script: node ./ci/stage-slice.js
