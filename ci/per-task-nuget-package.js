@@ -21,7 +21,9 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
 
     // TODO: I think we need to make changes here but start with this and see where it goes.
     console.log('> Linking aggregate layout content to per-task-layout path, may need to change this');
-    util.linkAggregateLayoutContent(util.milestoneLayoutPath, util.perTaskLayoutPath, /*release:*/'', /*commit:*/refs.head.commit, taskDestMap);
+    //var commitHash = refs.head.commit;
+    var commitHash = 'aaaaaa';
+    util.linkAggregateLayoutContent(util.milestoneLayoutPath, util.perTaskLayoutPath, /*release:*/'', commitHash, taskDestMap);
 
 
     // Iterate all the folders inside util.perTaskLayoutPath and create a nuspec file, pack, and create push.cmd
