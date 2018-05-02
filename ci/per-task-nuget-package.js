@@ -32,29 +32,38 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
             var taskPath = path.join(util.perTaskLayoutPath, taskName);
             console.log('> Task path: ' + taskPath);
 
-            // // create the nuspec file
-            // console.log();
-            // console.log('> Generating .nuspec file');
-            // var contents = '<?xml version="1.0" encoding="utf-8"?>' + os.EOL;
-            // contents += '<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">' + os.EOL;
-            // contents += '   <metadata>' + os.EOL;
-            // contents += '      <id>' + util.aggregatePackageName + '</id>' + os.EOL;
-            // contents += '      <version>' + process.env.AGGREGATE_VERSION + '</version>' + os.EOL;
-            // contents += '      <authors>bigbldt</authors>' + os.EOL;
-            // contents += '      <owners>bigbldt,Microsoft</owners>' + os.EOL;
-            // contents += '      <requireLicenseAcceptance>false</requireLicenseAcceptance>' + os.EOL;
-            // contents += '      <description>For VSS internal use only</description>' + os.EOL;
-            // contents += '      <tags>VSSInternal</tags>' + os.EOL;
-            // contents += '   </metadata>' + os.EOL;
-            // contents += '</package>' + os.EOL;
-            // fs.writeFileSync(util.aggregateNuspecPath, contents);
+            // // create the nuspec file for task
+            console.log();
+            console.log('> Generating .nuspec file');
+
+            // TODO: Also load from task.json
+            var taskVersion = 00001;
+
+            var contents = '<?xml version="1.0" encoding="utf-8"?>' + os.EOL;
+            contents += '<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">' + os.EOL;
+            contents += '   <metadata>' + os.EOL;
+            contents += '      <id>' + taskName + '</id>' + os.EOL;
+            contents += '      <version>' + taskVersion + '</version>' + os.EOL;
+            contents += '      <authors>bigbldt</authors>' + os.EOL;
+            contents += '      <owners>bigbldt,Microsoft</owners>' + os.EOL;
+            contents += '      <requireLicenseAcceptance>false</requireLicenseAcceptance>' + os.EOL;
+            contents += '      <description>For VSS internal use only</description>' + os.EOL;
+            contents += '      <tags>VSSInternal</tags>' + os.EOL;
+            contents += '   </metadata>' + os.EOL;
+            contents += '</package>' + os.EOL;
+
+            // Careful, what about major version in folder names? Need to parse task.json and use that.... maybe
+            var taskNuspecPath = path.join(taskPath, 'Mseng.MS.TF.Build.Tasks.' + taskName + '.nuspec');
+            fs.writeFileSync(taskNuspecPath, contents);
 
             // // pack
+            console.log('> packing nuget package for task ' + taskName);
             // fs.mkdirSync(util.publishLayoutPath);
             // process.chdir(util.publishLayoutPath);
             // util.run(`nuget pack "${util.aggregateNuspecPath}" -BasePath "${util.aggregatePackSourcePath}" -NoDefaultExcludes`, /*inheritStreams:*/true);
 
             // // create push.cmd
+            console.log('> creating push.cmd for task ' + taskName);
             // fs.writeFileSync(util.publishPushCmdPath, `nuget.exe push Mseng.MS.TF.Build.Tasks.${process.env.AGGREGATE_VERSION}.nupkg -source "${process.env.AGGREGATE_TASKS_FEED_URL}" -apikey Skyrise`);
 
 

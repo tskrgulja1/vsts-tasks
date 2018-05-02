@@ -51,11 +51,12 @@ steps:
     feedRestore: $(task_milestone_feed_name)
     includeNuGetOrg: false
     packagesDirectory: $(system.defaultWorkingDirectory)\_package\restore
-  #condition: ne(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true')
+  condition: ne(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true')
 
 # Stage aggregate
 - script: node .\ci\stage-aggregate.js
   displayName: Stage aggregate
+  condition: ne(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true')
 
 # Publish aggregate artifact
 - task: PublishBuildArtifacts@1
@@ -63,7 +64,7 @@ steps:
     pathToPublish: _package/publish-layout
     artifactName: TaskPackage
     artifactType: container
-  #condition: ne(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true')
+  condition: ne(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true')
 
 # Stage per task nuget package
 - script: node .\ci\per-task-nuget-package.js
