@@ -29,7 +29,7 @@ steps:
   displayName: Download slices
   env:
     SYSTEM_ACCESSTOKEN: $(system.accessToken)
-  condition: ne(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true')
+  #condition: ne(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true')
 
 # Stage milestone
 - script: node .\ci\stage-milestone.js
