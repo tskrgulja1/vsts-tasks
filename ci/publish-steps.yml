@@ -74,7 +74,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: Publish per task artifact
   inputs:
-    pathToPublish: _package/per-task-layout
+    pathToPublish: _package/publish-per-task
     artifactName: PerTaskPackages
     artifactType: container
   #condition: eq(variables['DISTRIBUTEDTASK_USE_PERTASK_NUGET'], 'true') # TODO: Enable this back.

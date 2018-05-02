@@ -16,6 +16,7 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
     // mkdir _package/per-task-layout
     console.log('> Creating folder _package/per-task-layout');
     fs.mkdirSync(util.perTaskLayoutPath);
+    fs.mkdirSync(util.publishNugetPerTaskPath); // make the folder that we will publish, publish-per-task
 
     // TODO: Below this line needs to be refactored for the per task nuget setup.
 
@@ -58,15 +59,27 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
             contents += '   </metadata>' + os.EOL;
             contents += '</package>' + os.EOL;
 
+
+
+
+            // TODO: We need one folder for the task contents and nuspec file(per-task-layout), then another folder(publish-per-task) that has a folder per task and inside
+            //       each folder we have the push.cmd and nupkg. We can publish from publishNugetPerTaskPath.
+
+
+
+
             // Careful, what about major version in folder names? Need to parse task.json and use that.... maybe
             //console.log('> writing nuspec file');
             // var taskNuspecPath = path.join(taskPath, 'Mseng.MS.TF.Build.Tasks.' + taskName + '.nuspec');
             // fs.writeFileSync(taskNuspecPath, contents);
 
             // // pack
-            //console.log('> packing nuget package for task ' + taskName);
-            // fs.mkdirSync(util.publishLayoutPath);
-            // process.chdir(util.publishLayoutPath);
+            console.log('> packing nuget package for task ' + taskName);
+            var taskPublishFolder = path.join(publishNugetPerTaskPath, taskName);
+
+            fs.mkdirSync(taskPublishFolder); // make the folder that we will publish, publish-per-task
+            process.chdir(taskPublishFolder);
+            fs.writeFileSync(path.join(taskPublishFolder, 'test.txt'), 'Here is my file content');
             // util.run(`nuget pack "${util.aggregateNuspecPath}" -BasePath "${util.aggregatePackSourcePath}" -NoDefaultExcludes`, /*inheritStreams:*/true);
 
             // // create push.cmd

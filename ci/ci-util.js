@@ -64,6 +64,9 @@ exports.publishLayoutPath = publishLayoutPath;
 var publishPushCmdPath = path.join(packagePath, 'publish-layout', 'push.cmd');
 exports.publishPushCmdPath = publishPushCmdPath;
 
+var publishNugetPerTaskPath = path.join(packagePath, 'publish-per-task');
+exports.publishNugetPerTaskPath = publishNugetPerTaskPath;
+
 //------------------------------------------------------------------------------
 // generic functions
 //------------------------------------------------------------------------------
