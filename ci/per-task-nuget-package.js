@@ -59,17 +59,18 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
             contents += '</package>' + os.EOL;
 
             // Careful, what about major version in folder names? Need to parse task.json and use that.... maybe
-            var taskNuspecPath = path.join(taskPath, 'Mseng.MS.TF.Build.Tasks.' + taskName + '.nuspec');
-            fs.writeFileSync(taskNuspecPath, contents);
+            //console.log('> writing nuspec file');
+            // var taskNuspecPath = path.join(taskPath, 'Mseng.MS.TF.Build.Tasks.' + taskName + '.nuspec');
+            // fs.writeFileSync(taskNuspecPath, contents);
 
             // // pack
-            console.log('> packing nuget package for task ' + taskName);
+            //console.log('> packing nuget package for task ' + taskName);
             // fs.mkdirSync(util.publishLayoutPath);
             // process.chdir(util.publishLayoutPath);
             // util.run(`nuget pack "${util.aggregateNuspecPath}" -BasePath "${util.aggregatePackSourcePath}" -NoDefaultExcludes`, /*inheritStreams:*/true);
 
             // // create push.cmd
-            console.log('> creating push.cmd for task ' + taskName);
+            //console.log('> creating push.cmd for task ' + taskName);
             // fs.writeFileSync(util.publishPushCmdPath, `nuget.exe push Mseng.MS.TF.Build.Tasks.${process.env.AGGREGATE_VERSION}.nupkg -source "${process.env.AGGREGATE_TASKS_FEED_URL}" -apikey Skyrise`);
 
 
