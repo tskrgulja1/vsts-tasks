@@ -28,15 +28,18 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
 
 
     // Iterate all the folders inside util.perTaskLayoutPath and create a nuspec file, pack, and create push.cmd
+    console.log();
     console.log('> Iterating all folders in per-task-layout');
 
     fs.readdirSync(util.perTaskLayoutPath) // walk each item in the aggregate layout
         .forEach(function (taskName) {
             var taskPath = path.join(util.perTaskLayoutPath, taskName);
+            console.log('> Task path exists: ' + fs.existsSync(taskPath));
+
+            console.log();
             console.log('> Task path: ' + taskPath);
 
-            // // create the nuspec file for task
-            console.log();
+            // create the nuspec file for task
             console.log('> Generating .nuspec file');
 
             // TODO: Also load from task.json
