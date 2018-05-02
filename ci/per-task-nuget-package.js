@@ -75,12 +75,15 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
 
             // // pack
             console.log('> packing nuget package for task ' + taskName);
-            var taskPublishFolder = path.join(publishNugetPerTaskPath, taskName);
+            var taskPublishFolder = path.join(util.publishNugetPerTaskPath, taskName);
 
             fs.mkdirSync(taskPublishFolder); // make the folder that we will publish, publish-per-task
             process.chdir(taskPublishFolder);
             fs.writeFileSync(path.join(taskPublishFolder, 'test.txt'), 'Here is my file content');
             // util.run(`nuget pack "${util.aggregateNuspecPath}" -BasePath "${util.aggregatePackSourcePath}" -NoDefaultExcludes`, /*inheritStreams:*/true);
+
+
+            // TODO: Add detailed example of folder structure for util.publishNugetPerTaskPath vs. util.perTaskLayoutPath
 
             // // create push.cmd
             //console.log('> creating push.cmd for task ' + taskName);
