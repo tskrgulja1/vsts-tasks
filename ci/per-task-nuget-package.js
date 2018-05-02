@@ -23,6 +23,7 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
     console.log('> Linking aggregate layout content to per-task-layout path, may need to change this');
     //var commitHash = refs.head.commit;
     var commitHash = 'aaaaaa';
+    var taskDestMap = {}; // I don't think this is actually used for anything?
     util.linkAggregateLayoutContent(util.milestoneLayoutPath, util.perTaskLayoutPath, /*release:*/'', commitHash, taskDestMap);
 
 
@@ -104,3 +105,11 @@ if (process.env.DISTRIBUTEDTASK_USE_PERTASK_NUGET) {
 
     console.log('> ');
 }
+
+// TODO: Make sure we have a step later that then publishes this artifact.
+
+
+
+
+
+
