@@ -40,7 +40,7 @@ steps:
   # Stage slice
   - script: node ./ci/stage-slice.js
     displayName: Stage slice
-    # condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'), ne(variables.DISTRIBUTEDTASK_USE_PERTASK_NUGET, 'true'))
+    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
 
   # Publish slice artifact
   - task: PublishBuildArtifacts@1
